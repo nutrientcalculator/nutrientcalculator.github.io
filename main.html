@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width",
+    initial-scale=1.0" />
+    <title> Nutrition Calculator </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            //iterate through each textboxes and add keyup
+            //handler to trigger sum event
+            $(".txt").each(function () {
+                $(this).keyup(function () {
+                    calculateSum();
+                });
+            });
+        });
+
+        function calculateSum() {
+            var sum = 0;
+            //iterate through each textboxes and add the values
+            $(".txt").each(function () {
+                //add only if the value is number
+                if (!isNaN(this.value) && this.value.length != 0) {
+                    sum += parseFloat(this.value);
+                }
+            });
+            
+            var sumQ = [];
+            for (var i=1; i<=5; i++) {
+                sumQ[i] = 0;
+                $('td:nth-child('+(i+1)+')').find(".txt").each(function () {
+                    if (!isNaN(this.value) && this.value.length != 0) {
+                        sumQ[i] += parseFloat(this.value);
+                    }
+                });
+                $(".span7").find('input').eq(i-1).val(sumQ[i].toFixed(2));
+            }
+            //.toFixed() method will roundoff the final sum to 2 decimal places
+            var remain = [];
+            var required = [2175,332,67,64,2000]
+            for (var i=1; i<=5; i++) {
+                remain[i] = required[i-1] - sumQ[i]
+                $(".span8").find('input').eq(i-1).val(remain[i].toFixed(2));
+            }
+            //.toFixed() method will roundoff the final sum to 2 decimal places
+            $("#remain").val(remain.toFixed(2));
+            
+        }
+    </script>
+</head>
+<body>
+<div class="card">
+	<h3 class="card-header text-center font-weight-bold text-uppercase py-4">
+    Nutrition Calculator
+  </h3>
+        <table class="table table-bordered table-responsive-md table-striped text-center">
+            <thead>
+                <tr>
+                    <th>Meal</th>
+                    <th>Calories</th>
+                    <th>Carbohydrates</th>
+                    <th>Protein</th>
+                    <th>Fat</th>
+                  	<th>Sodium</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>Breakfast</td>
+                <td>
+                    <input type="text" class="txt input-mini" />
+                </td>
+                <td>
+                    <input type="text" class="txt input-mini" />
+                </td>
+                <td>
+                    <input type="text" class="txt input-mini" />
+                </td>
+              <td>
+                    <input type="text" class="txt input-mini" />
+                </td>
+              <td>
+                    <input type="text" class="txt input-mini" />
+                </td>
+            </tr>
+						<tr>
+                <td>AM Snack</td>
+                <td>
+                    <input type="text" class="txt input-mini" />
+                </td>
+                <td>
+                    <input type="text" class="txt input-mini" />
+                </td>
+                <td>
+                    <input type="text" class="txt input-mini" />
+                </td>
+              <td>
+                    <input type="text" class="txt input-mini" />
+                </td>
+              <td>
+                    <input type="text" class="txt input-mini" />
+                </td>
+            </tr>
+            <tbody>
+            </tbody>
+          <tr>
+                <td>Lunch</td>
+                <td>
+                    <input type="text" class="txt input-mini" />
+                </td>
+                <td>
+                    <input type="text" class="txt input-mini" />
+                </td>
+                <td>
+                    <input type="text" class="txt input-mini" />
+                </td>
+              <td>
+                    <input type="text" class="txt input-mini" />
+                </td>
+              <td>
+                    <input type="text" class="txt input-mini" />
+                </td>
+            </tr>
+          <tr>
+                <td>PM Snack</td>
+                <td>
+                    <input type="text" class="txt input-mini" />
+                </td>
+                <td>
+                    <input type="text" class="txt input-mini" />
+                </td>
+                <td>
+                    <input type="text" class="txt input-mini" />
+                </td>
+              <td>
+                    <input type="text" class="txt input-mini" />
+                </td>
+              <td>
+                    <input type="text" class="txt input-mini" />
+                </td>
+            </tr>
+          <tr>
+            	<td>Total</td>
+              <td class="span7"><input type="text" class="input-mini" /></td>
+            	<td class="span7"><input type="text" class="input-mini" /></td>
+            	<td class="span7"><input type="text" class="input-mini" /></td>
+            	<td class="span7"><input type="text" class="input-mini" /></td>
+            	<td class="span7"><input type="text" class="input-mini" /></td>
+          <tr>
+          	<td>Daily Requirement</td>
+            <td>2175 Calories</td>
+            <td>332 grams</td>
+            <td>67 grams</td>
+            <td>64 grams</td>
+            <td>2000 mg</td>
+          </tr>
+          <tr>
+            	<td>Remaining</td>
+            	<td class="span8"><input type="text" class="input-mini" /></td>
+              <td class="span8"><input type="text" class="input-mini" /></td>
+              <td class="span8"><input type="text" class="input-mini" /></td>
+              <td class="span8"><input type="text" class="input-mini" /></td>
+              <td class="span8"><input type="text" class="input-mini" /></td>
+          </tr>
+        </table>
+            
+        </div>
+    </div>
+</body>
+</html>
